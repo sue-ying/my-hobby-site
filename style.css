@@ -1,0 +1,740 @@
+/* ==========================================================================
+   Yoga Mindful Static Website - Stylesheet (style.css)
+   Clean, offline-ready, responsive, accessible design.
+   ========================================================================== */
+
+/* 1. Global Reset & Variables */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Peaceful Zen Color Palette */
+  --color-bg: #F7F6F2;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F1F4F0;
+  --color-primary: #385E4E;
+  --color-primary-light: #4D7865;
+  --color-primary-subtle: #E8EFEA;
+  --color-accent: #C7734C;
+  --color-accent-subtle: #FDF3ED;
+  --color-text-main: #1D2B24;
+  --color-text-muted: #596B61;
+  --color-border: #E0E7E2;
+  --color-border-hover: #BED0C6;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans", sans-serif;
+  --line-height-base: 1.65;
+  --line-height-heading: 1.3;
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 2px 8px rgba(35, 55, 45, 0.05);
+  --shadow-md: 0 6px 20px rgba(35, 55, 45, 0.08);
+  --shadow-lg: 0 12px 32px rgba(35, 55, 45, 0.12);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: var(--line-height-base);
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 2. Bilingual Modes */
+body.mode-en .lang-zh {
+  display: none !important;
+}
+
+body.mode-zh .lang-en {
+  display: none !important;
+}
+
+body.mode-en .lang-sep,
+body.mode-zh .lang-sep {
+  display: none !important;
+}
+
+/* In bilingual mode (default), format Chinese translations gracefully */
+body.mode-all .title-zh {
+  display: block;
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--color-primary-light);
+  margin-top: 0.35rem;
+  line-height: 1.35;
+}
+
+body.mode-all .intro-zh {
+  display: block;
+  font-size: 0.95em;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+body.mode-all .section-title .lang-zh {
+  display: block;
+  font-size: 0.78em;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-top: 0.25rem;
+}
+
+body.mode-all .section-subtitle .lang-zh {
+  display: block;
+  font-size: 0.92em;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+body.mode-all .card-title .lang-zh {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+body.mode-all .card-desc .lang-zh {
+  display: block;
+  font-size: 0.92em;
+  color: var(--color-text-muted);
+  margin-top: 0.4rem;
+  line-height: 1.55;
+}
+
+body.mode-all .step-title .lang-zh {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 500;
+  color: var(--color-primary-light);
+  margin-top: 0.25rem;
+}
+
+body.mode-all .step-text .lang-zh {
+  display: block;
+  font-size: 0.92em;
+  color: var(--color-text-muted);
+  margin-top: 0.45rem;
+  line-height: 1.6;
+}
+
+body.mode-all .tip-text .lang-zh {
+  display: block;
+  font-size: 0.9em;
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+}
+
+body.mode-all .quote-text .lang-zh {
+  display: block;
+  font-size: 0.88em;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+body.mode-all .footer-text .lang-zh {
+  display: block;
+  font-size: 0.9em;
+  color: var(--color-text-muted);
+  margin-top: 0.35rem;
+}
+
+/* 3. Site Header & Nav */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(247, 246, 242, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+}
+
+.header-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+  display: inline-block;
+  line-height: 1;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+}
+
+.logo-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.lang-switcher {
+  display: inline-flex;
+  background: var(--color-surface-soft);
+  padding: 3px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.lang-btn:hover {
+  color: var(--color-primary);
+}
+
+.lang-btn.active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* 4. Main Container & Sections */
+.main-content {
+  flex: 1;
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+.section {
+  margin-top: 3.5rem;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 4vw, 1.95rem);
+  color: var(--color-primary);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  line-height: 1.55;
+}
+
+/* 5. Hero Section (Feature 1) */
+.hero-section {
+  text-align: center;
+  padding: 2.2rem 1rem 1.5rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(56, 94, 78, 0.15);
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hero-title {
+  font-size: clamp(1.75rem, 5.5vw, 2.65rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.025em;
+  margin-bottom: 1.15rem;
+}
+
+.hero-intro {
+  font-size: clamp(1.05rem, 2.8vw, 1.22rem);
+  color: var(--color-text-main);
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tag {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-border-hover);
+}
+
+/* 6. Emoji Cards Section (Feature 2) */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.85rem 1.45rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
+}
+
+.card-emoji-wrapper {
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--color-border);
+  transition: transform 0.25s ease;
+}
+
+.card:hover .card-emoji-wrapper {
+  transform: scale(1.08) rotate(2deg);
+  background: var(--color-primary-subtle);
+}
+
+.card-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin-bottom: 0.35rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.65rem;
+  line-height: var(--line-height-heading);
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+}
+
+.card-benefits {
+  list-style: none;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--color-border);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.card-benefits li {
+  line-height: 1.4;
+}
+
+/* 7. 3-Step Guide Section (Feature 3) */
+.guide-lead-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.step-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 1.35rem;
+  align-items: flex-start;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.step-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.step-badge-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(56, 94, 78, 0.25);
+}
+
+.step-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.step-body {
+  flex: 1;
+  min-width: 0; /* Prevents overflow in flex child */
+}
+
+.step-title {
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: var(--line-height-heading);
+  margin-bottom: 0.5rem;
+}
+
+.step-text {
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.step-tip {
+  display: flex;
+  gap: 0.55rem;
+  background: var(--color-surface-soft);
+  border-left: 3px solid var(--color-accent);
+  padding: 0.6rem 0.85rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.85rem;
+  align-items: flex-start;
+}
+
+.tip-icon {
+  font-size: 1rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  color: var(--color-text-main);
+  line-height: 1.5;
+}
+
+.tip-text strong {
+  color: var(--color-primary);
+}
+
+/* 8. Zen Quote Section */
+.quote-section {
+  margin-top: 3.5rem;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.zen-quote {
+  background: linear-gradient(135deg, var(--color-surface-soft) 0%, #FFFFFF 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.quote-text {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-primary);
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+
+.quote-author {
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* 9. Site Footer */
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 2.2rem 1.25rem;
+  margin-top: auto;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  font-size: 0.92rem;
+  color: var(--color-text-main);
+  line-height: 1.6;
+}
+
+.footer-meta {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 0.75rem;
+}
+
+.footer-meta span {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  background: var(--color-surface-soft);
+  border-radius: 4px;
+}
+
+/* 10. Responsive Design for Mobile Devices (No Text Truncation) */
+@media (max-width: 640px) {
+  .site-header {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .lang-switcher {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .lang-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.4rem 0.3rem;
+    font-size: 0.76rem;
+  }
+
+  .main-content {
+    padding: 1.25rem 0.85rem 2.5rem;
+  }
+
+  .hero-section {
+    padding: 1rem 0.25rem 1rem;
+  }
+
+  .hero-tags {
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .card {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .card-emoji-wrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 0.9rem;
+  }
+
+  .card-emoji {
+    font-size: 2.1rem;
+  }
+
+  .step-card {
+    flex-direction: column;
+    padding: 1.25rem 1.1rem;
+    gap: 0.85rem;
+  }
+
+  .step-badge-col {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
+  .step-icon {
+    font-size: 1.3rem;
+  }
+
+  .step-tip {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  .zen-quote {
+    padding: 1.4rem 1.1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Extra safeguard for small mobile screens (e.g. 320px - 360px) */
+  body {
+    font-size: 15px;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .card-benefits {
+    font-size: 0.78rem;
+  }
+}
+
